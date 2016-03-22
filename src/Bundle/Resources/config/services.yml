@@ -1,0 +1,8 @@
+services:
+    unzeroun_sorter.applier.array:
+        class: UnZeroUn\Sorter\Applier\ArrayApplier
+        tags:  [ { name: unzeroun_sorter.applier } ]
+
+    unzeroun_sorter.factory:
+        class:     UnZeroUn\Sorter\SorterFactory
+        arguments: [[]]
