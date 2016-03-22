@@ -36,7 +36,7 @@ class SorterSpec extends ObjectBehavior
         $this->add('b', '[b]');
         $this->handle(['a' => 'ASC']);
 
-        $this->getCurrentSort()->shouldBeSortedBy('a', 'ASC');
+        $this->getCurrentSort()->shouldBeSortedBy('[a]', 'ASC');
     }
 
     function it_handles_request(Request $request)
@@ -46,10 +46,8 @@ class SorterSpec extends ObjectBehavior
         $request->get('a')->shouldBeCalled()->willReturn('ASC');
         $request->get('b')->shouldBeCalled()->willReturn(null);
 
-
-
         $this->handleRequest($request);
-        $this->getCurrentSort()->shouldBeSortedBy('a', 'ASC');
+        $this->getCurrentSort()->shouldBeSortedBy('[a]', 'ASC');
     }
 
     function it_sorts(SorterFactory $factory, SortApplier $applier)

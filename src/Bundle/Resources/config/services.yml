@@ -3,6 +3,10 @@ services:
         class: UnZeroUn\Sorter\Applier\ArrayApplier
         tags:  [ { name: unzeroun_sorter.applier } ]
 
+    unzeroun_sorter.applier.doctrine_orm:
+        class: UnZeroUn\Sorter\Applier\DoctrineORMApplier
+        tags:  [ { name: unzeroun_sorter.applier } ]
+
     unzeroun_sorter.factory:
         class:     UnZeroUn\Sorter\SorterFactory
         arguments: [[]]

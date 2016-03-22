@@ -33,6 +33,8 @@ class Sorter
     public function add($field, $path)
     {
         $this->fields[$field] = $path;
+
+        return $this;
     }
 
     /**
@@ -65,7 +67,7 @@ class Sorter
     {
         $sort = new Sort();
         foreach ($values as $field => $value) {
-            $sort->add($field, $value);
+            $sort->add($this->getPath($field), $value);
         }
 
         $this->currentSort = $sort;
