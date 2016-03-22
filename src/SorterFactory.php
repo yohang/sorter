@@ -18,11 +18,18 @@ class SorterFactory
     }
 
     /**
+     * @param Definition $definition
+     *
      * @return Sorter
      */
-    public function createSorter()
+    public function createSorter(Definition $definition = null)
     {
-        return new Sorter($this);
+        $sorter = new Sorter($this);
+        if (null !== $definition) {
+            $definition->buildSorter($sorter);
+        }
+
+        return $sorter;
     }
 
     /**

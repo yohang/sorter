@@ -5,6 +5,7 @@ namespace spec\UnZeroUn\Sorter;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use UnZeroUn\Sorter\Applier\SortApplier;
+use UnZeroUn\Sorter\Definition;
 
 class SorterFactorySpec extends ObjectBehavior
 {
@@ -21,6 +22,13 @@ class SorterFactorySpec extends ObjectBehavior
     function it_creates_sorter()
     {
         $this->createSorter()->shouldHaveType('UnZeroUn\Sorter\Sorter');
+    }
+
+    function it_creates_sorter_from_definition(Definition $definition)
+    {
+        $definition->buildSorter(Argument::type('UnZeroUn\Sorter\Sorter'))->shouldBeCalled();
+
+        $this->createSorter($definition)->shouldHaveType('UnZeroUn\Sorter\Sorter');
     }
 
     function it_has_appliers(SortApplier $applier1, SortApplier $applier2)
