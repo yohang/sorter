@@ -10,3 +10,11 @@ services:
     unzeroun_sorter.factory:
         class:     UnZeroUn\Sorter\SorterFactory
         arguments: [[]]
+
+    unzeroun_sorter.builder.url:
+        class: UnZeroUn\Sorter\Builder\UrlBuilder
+
+    unzeroun_sorter.extension.twig.sort:
+        class:     UnZeroUn\Sorter\Bundle\Extension\Twig\SortExtension
+        arguments: [ '@unzeroun_sorter.builder.url', '@request_stack' ]
+        tags:      [ { name: twig.extension } ]
