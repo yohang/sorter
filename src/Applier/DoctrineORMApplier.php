@@ -17,8 +17,9 @@ class DoctrineORMApplier implements SortApplier
     public function apply(Sort $sort, $data)
     {
         /** @var QueryBuilder $data */
+        $i = 0;
         foreach ($sort->getFields() as $field) {
-            $data->addOrderBy($field, $sort->getDirection($field));
+            $data->{$i++ === 0 ? 'orderBy' : 'addOrderBy'}($field, $sort->getDirection($field));
         }
     }
 
