@@ -90,11 +90,12 @@ class Sorter
 
     /**
      * @param mixed $data
+     * @param array $options
      *
      * @return mixed
      */
-    public function sort($data)
+    public function sort($data, array $options = [])
     {
-        return $this->factory->getApplier($data)->apply($this->currentSort, $data);
+        return $this->factory->getApplier($data)->apply($this->currentSort, $data, $options);
     }
 }

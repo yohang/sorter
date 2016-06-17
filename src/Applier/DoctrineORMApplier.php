@@ -9,17 +9,20 @@ class DoctrineORMApplier implements SortApplier
 {
 
     /**
-     * @param Sort  $sort
-     * @param array $data
+     * @param Sort         $sort
+     * @param QueryBuilder $data
+     * @param array        $options
      *
      * @return array
      */
-    public function apply(Sort $sort, $data)
+    public function apply(Sort $sort, $data, array $options = [])
     {
+        $override = isset($options['override']) ? $options['override'] : true;
+
         /** @var QueryBuilder $data */
         $i = 0;
         foreach ($sort->getFields() as $field) {
-            $data->{$i++ === 0 ? 'orderBy' : 'addOrderBy'}($field, $sort->getDirection($field));
+            $data->{($i++ === 0 && $override) ? 'orderBy' : 'addOrderBy'}($field, $sort->getDirection($field));
         }
     }
 

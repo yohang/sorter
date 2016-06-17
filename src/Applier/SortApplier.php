@@ -11,10 +11,11 @@ interface SortApplier
     /**
      * @param Sort  $sort
      * @param mixed $data
+     * @param array $options
      *
      * @return mixed
      */
-    public function apply(Sort $sort, $data);
+    public function apply(Sort $sort, $data, array $options = []);
 
     /**
      * @param mixed $data

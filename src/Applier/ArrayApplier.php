@@ -22,10 +22,11 @@ class ArrayApplier implements SortApplier
     /**
      * @param Sort  $sort
      * @param array $data
+     * @param array $options
      *
      * @return array
      */
-    public function apply(Sort $sort, $data)
+    public function apply(Sort $sort, $data, array $options = [])
     {
         usort(
             $data,
