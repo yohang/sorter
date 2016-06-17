@@ -59,7 +59,7 @@ class SorterSpec extends ObjectBehavior
         $this->add('b', '[b]');
 
         $factory->getApplier($data)->shouldBeCalled()->willReturn($applier);
-        $applier->apply(Argument::type('UnZeroUn\Sorter\Sort'), $data)->shouldBeCalled()->willReturn($sorted);
+        $applier->apply(Argument::type('UnZeroUn\Sorter\Sort'), $data, [])->shouldBeCalled()->willReturn($sorted);
 
         $this->handle(['a' => 'DESC']);
         $this->sort($data)->shouldBe($sorted);
