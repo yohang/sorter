@@ -12,6 +12,11 @@ class Sorter
     private $fields = [];
 
     /**
+     * @var array
+     */
+    private $defaults = [];
+
+    /**
      * @var SorterFactory
      */
     private $factory;
@@ -33,6 +38,22 @@ class Sorter
     public function add($field, $path)
     {
         $this->fields[$field] = $path;
+
+        return $this;
+    }
+
+    public function addDefault($path, $direction)
+    {
+        $this->defaults[$path] = $direction;
+
+        return $this;
+    }
+
+    public function removeDefault($path)
+    {
+        if (isset($this->defaults[$path])) {
+            unset($this->defaults[$path]);
+        }
 
         return $this;
     }
@@ -68,6 +89,12 @@ class Sorter
         $sort = new Sort();
         foreach ($values as $field => $value) {
             $sort->add($this->getPath($field), $value);
+        }
+
+        if (count($sort->getFields()) === 0) {
+            foreach ($this->defaults as $defaultPath => $direction) {
+                $sort->add($defaultPath, $direction);
+            }
         }
 
         $this->currentSort = $sort;

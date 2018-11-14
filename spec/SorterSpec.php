@@ -50,6 +50,45 @@ class SorterSpec extends ObjectBehavior
         $this->getCurrentSort()->shouldBeSortedBy('[a]', 'ASC');
     }
 
+    function it_should_use_defaults_if_no_fields_provided()
+    {
+        $this->add('a', '[a]');
+        $this->add('b', '[b]');
+
+        $this->addDefault('[c]', 'DESC');
+
+        $this->handle([]);
+
+        $this->getCurrentSort()->shouldBeSortedBy('[c]', 'DESC');
+    }
+
+    function it_should_use_fields_if_provided()
+    {
+        $this->add('a', '[a]');
+        $this->add('b', '[b]');
+
+        $this->addDefault('[c]', 'DESC');
+
+        $this->handle(['a' => 'ASC']);
+
+        $this->getCurrentSort()->shouldBeSortedBy('[a]', 'ASC');
+    }
+
+    function it_handles_multiple_defaults()
+    {
+        $this->add('a', '[a]');
+        $this->add('b', '[b]');
+
+        $this->addDefault('[c]', 'DESC');
+        $this->addDefault('[d]', 'ASC');
+
+        $this->handle([]);
+
+        $currentSort = $this->getCurrentSort();
+        $currentSort->shouldBeSortedBy('[c]', 'DESC');
+        $currentSort->shouldBeSortedBy('[d]', 'ASC');
+    }
+
     function it_sorts(SorterFactory $factory, SortApplier $applier)
     {
         $data   = [['a' => 123], ['a' => 234]];
