@@ -1,37 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UnZeroUn\Sorter\Applier;
 
 use Doctrine\ORM\QueryBuilder;
+use UnZeroUn\Sorter\Exception\IncompatibleApplierException;
 use UnZeroUn\Sorter\Sort;
 
-class DoctrineORMApplier implements SortApplier
+final class DoctrineORMApplier implements SortApplier
 {
-
-    /**
-     * @param Sort         $sort
-     * @param QueryBuilder $data
-     * @param array        $options
-     *
-     * @return array
-     */
-    public function apply(Sort $sort, $data, array $options = [])
+    #[\Override]
+    public function apply(Sort $sort, mixed $data, array $options = []): void
     {
-        $override = isset($options['override']) ? $options['override'] : true;
+        if (!$data instanceof QueryBuilder) {
+            throw new IncompatibleApplierException(QueryBuilder::class, $data);
+        }
 
-        /** @var QueryBuilder $data */
-        $i = 0;
-        foreach ($sort->getFields() as $field) {
-            $data->{($i++ === 0 && $override) ? 'orderBy' : 'addOrderBy'}($field, $sort->getDirection($field));
+        $override = filter_var($options['override'] ?? true, \FILTER_VALIDATE_BOOL);
+
+        foreach ($sort->getFields() as $i => $field) {
+            $data->{(0 === $i && $override) ? 'orderBy' : 'addOrderBy'}($field, $sort->getDirection($field));
         }
     }
 
-    /**
-     * @param mixed $data
-     *
-     * @return bool
-     */
-    public function supports($data)
+    #[\Override]
+    public function supports(mixed $data): bool
     {
         return $data instanceof QueryBuilder;
     }

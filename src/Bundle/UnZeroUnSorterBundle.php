@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UnZeroUn\Sorter\Bundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -9,9 +11,10 @@ use UnZeroUn\Sorter\Bundle\DependencyInjection\Compiler\ApplierCompilerPass;
 /**
  * @author Yohan Giarelli <yohan@giarel.li>
  */
-class UnZeroUnSorterBundle extends Bundle
+final class UnZeroUnSorterBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    #[\Override]
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new ApplierCompilerPass());
     }

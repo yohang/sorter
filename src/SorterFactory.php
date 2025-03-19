@@ -1,28 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UnZeroUn\Sorter;
 
-class SorterFactory
+use UnZeroUn\Sorter\Applier\SortApplier;
+
+final class SorterFactory
 {
     /**
-     * @var \UnZeroUn\Sorter\Applier\SortApplier[]
+     * @var SortApplier[]
      */
-    private $appliers;
+    private readonly array $appliers;
 
     /**
-     * @param \UnZeroUn\Sorter\Applier\SortApplier[] $appliers
+     * @param SortApplier[] $appliers
      */
     public function __construct(array $appliers)
     {
         $this->appliers = $appliers;
     }
 
-    /**
-     * @param Definition $definition
-     *
-     * @return Sorter
-     */
-    public function createSorter(Definition $definition = null)
+    public function createSorter(?Definition $definition = null): Sorter
     {
         $sorter = new Sorter($this);
         if (null !== $definition) {
@@ -32,12 +31,7 @@ class SorterFactory
         return $sorter;
     }
 
-    /**
-     * @param mixed $data
-     *
-     * @return Applier\SortApplier
-     */
-    public function getApplier($data)
+    public function getApplier(mixed $data): SortApplier
     {
         foreach ($this->appliers as $applier) {
             if ($applier->supports($data)) {

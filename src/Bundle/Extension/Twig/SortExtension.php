@@ -1,72 +1,52 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UnZeroUn\Sorter\Bundle\Extension\Twig;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 use UnZeroUn\Sorter\Builder\UrlBuilder;
+use UnZeroUn\Sorter\Exception\NoRequestException;
 use UnZeroUn\Sorter\Sorter;
 
-/**
- * @author Yohan Giarelli <yohan@giarel.li>
- */
-class SortExtension extends \Twig_Extension
+final class SortExtension extends AbstractExtension
 {
-    /**
-     * @var UrlBuilder
-     */
-    private $urlBuilder;
-
-    /**
-     * @var RequestStack
-     */
-    private $requestStack;
-
-    /**
-     * @param UrlBuilder $urlBuilder
-     */
-    public function __construct(UrlBuilder $urlBuilder, RequestStack $requestStack)
-    {
-        $this->urlBuilder   = $urlBuilder;
-        $this->requestStack = $requestStack;
+    public function __construct(
+        private readonly UrlBuilder $urlBuilder,
+        private readonly RequestStack $requestStack,
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctions()
+    #[\Override]
+    public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('sorter_link', [$this, 'getSorterLink'], ['is_safe' => ['html']]),
+            new TwigFunction('sorter_link', [$this, 'getSorterLink'], ['is_safe' => ['html']]),
         ];
     }
 
-    /**
-     * @param Sorter  $sorter
-     * @param string  $field
-     * @param string  $text
-     * @param string  $direction
-     * @param Request $request
-     *
-     * @return string
-     */
-    public function getSorterLink(Sorter $sorter, $field, $text, $direction = null, Request $request = null)
-    {
+    public function getSorterLink(
+        Sorter $sorter,
+        string $field,
+        string $text,
+        ?string $direction = null,
+        ?Request $request = null,
+    ): string {
+        $request = $request ?: $this->requestStack->getCurrentRequest();
+        if (null === $request) {
+            throw new NoRequestException();
+        }
+
         $link = $this->urlBuilder->generateFromRequest(
             $sorter,
-            $request ?: $this->requestStack->getCurrentRequest(),
+            $request,
             $field,
             $direction
         );
 
-        return sprintf('<a href="%s">%s</a>', $link, $text);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sorter_sort';
+        return \sprintf('<a href="%s">%s</a>', $link, $text);
     }
 }

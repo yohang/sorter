@@ -1,46 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UnZeroUn\Sorter\Applier;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use UnZeroUn\Sorter\Exception\IncompatibleApplierException;
 use UnZeroUn\Sorter\Sort;
 
-class ArrayApplier implements SortApplier
+final class ArrayApplier implements SortApplier
 {
-    /**
-     * @var PropertyAccessor
-     */
-    private $propertyAccessor;
+    private readonly PropertyAccessor $propertyAccessor;
 
-    public function __construct(PropertyAccessor $propertyAccessor = null)
+    public function __construct(?PropertyAccessor $propertyAccessor = null)
     {
-
         $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
     }
 
-    /**
-     * @param Sort  $sort
-     * @param array $data
-     * @param array $options
-     *
-     * @return array
-     */
-    public function apply(Sort $sort, $data, array $options = [])
+    #[\Override]
+    public function apply(Sort $sort, mixed $data, array $options = []): array
     {
+        if (!\is_array($data)) {
+            throw new IncompatibleApplierException('array', $data);
+        }
+
+        /** @var list<array<string, mixed>|object> $data */
         usort(
             $data,
+            /**
+             * @param array<string, mixed>|object $left
+             * @param array<string, mixed>|object $right
+             */
             function ($left, $right) use ($sort) {
                 foreach ($sort->getFields() as $field) {
-                    $leftValue  = $this->propertyAccessor->getValue($left,  $field);
+                    /** @var mixed $leftValue */
+                    $leftValue = $this->propertyAccessor->getValue($left, $field);
+                    /** @var mixed $rightValue */
                     $rightValue = $this->propertyAccessor->getValue($right, $field);
 
                     if ($leftValue > $rightValue) {
-                        return $sort->getDirection($field) === 'ASC' ? 1 : -1;
+                        return 'ASC' === $sort->getDirection($field) ? 1 : -1;
                     }
 
                     if ($leftValue < $rightValue) {
-                        return $sort->getDirection($field) === 'ASC' ? -1 : 1;
+                        return 'ASC' === $sort->getDirection($field) ? -1 : 1;
                     }
                 }
 
@@ -51,13 +55,9 @@ class ArrayApplier implements SortApplier
         return $data;
     }
 
-    /**
-     * @param mixed $data
-     *
-     * @return bool
-     */
-    public function supports($data)
+    #[\Override]
+    public function supports(mixed $data): bool
     {
-        return is_array($data);
+        return \is_array($data);
     }
 }

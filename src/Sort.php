@@ -1,47 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UnZeroUn\Sorter;
 
-class Sort
+use UnZeroUn\Sorter\Exception\UnknowFieldException;
+
+final class Sort
 {
-    /**
-     * @var array
-     */
-    private $fields = [];
+    public const ASC = 'ASC';
+    public const DESC = 'DESC';
 
     /**
-     * @param string $field
-     * @param string $direction
+     * @var array<string, self::ASC|self::DESC>
      */
-    public function add($field, $direction)
+    private array $fields = [];
+
+    /**
+     * @param self::ASC|self::DESC $direction
+     */
+    public function add(string $field, string $direction): void
     {
         $this->fields[$field] = $direction;
     }
 
     /**
-     * @return array
+     * @return list<string>
      */
-    public function getFields()
+    public function getFields(): array
     {
         return array_keys($this->fields);
     }
 
     /**
-     * @param string $field
-     *
-     * @return mixed
+     * @return self::ASC|self::DESC
      */
-    public function getDirection($field)
+    public function getDirection(string $field): string
     {
+        if (!isset($this->fields[$field])) {
+            throw new UnknowFieldException($field, $this->getFields());
+        }
+
         return $this->fields[$field];
     }
 
-    /**
-     * @param string $field
-     *
-     * @return bool
-     */
-    public function has($field)
+    public function has(string $field): bool
     {
         return isset($this->fields[$field]);
     }

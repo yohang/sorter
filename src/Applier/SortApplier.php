@@ -1,26 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UnZeroUn\Sorter\Applier;
+
 use UnZeroUn\Sorter\Sort;
 
-/**
- * @author Yohan Giarelli <yohan@giarel.li>
- */
 interface SortApplier
 {
-    /**
-     * @param Sort  $sort
-     * @param mixed $data
-     * @param array $options
-     *
-     * @return mixed
-     */
-    public function apply(Sort $sort, $data, array $options = []);
+    public function apply(Sort $sort, mixed $data, array $options = []): mixed;
 
-    /**
-     * @param mixed $data
-     *
-     * @return boolean
-     */
-    public function supports($data);
+    public function supports(mixed $data): bool;
 }

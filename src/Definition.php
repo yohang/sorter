@@ -1,14 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UnZeroUn\Sorter;
 
-/**
- * @author Yohan Giarelli <yohan@giarel.li>
- */
 interface Definition
 {
-    /**
-     * @param Sorter $sorter
-     */
-    public function buildSorter(Sorter $sorter);
+    public function buildSorter(Sorter $sorter): void;
 }

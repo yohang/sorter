@@ -1,55 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UnZeroUn\Sorter;
 
 use Symfony\Component\HttpFoundation\Request;
+use UnZeroUn\Sorter\Exception\NoSortException;
+use UnZeroUn\Sorter\Exception\UnknowSortDirectionException;
 
-class Sorter
+final class Sorter
 {
     /**
-     * @var array
+     * @var array<string, string>
      */
-    private $fields = [];
+    private array $fields = [];
 
     /**
-     * @var array
+     * @var array<string, Sort::ASC|Sort::DESC>
      */
-    private $defaults = [];
+    private array $defaults = [];
 
-    /**
-     * @var SorterFactory
-     */
-    private $factory;
+    private ?Sort $currentSort = null;
 
-    /**
-     * @var Sort
-     */
-    private $currentSort;
-
-    public function __construct(SorterFactory $factory)
+    public function __construct(private readonly SorterFactory $factory)
     {
-        $this->factory = $factory;
     }
 
-    /**
-     * @param string $field
-     * @param string $path
-     */
-    public function add($field, $path)
+    public function add(string $field, string $path): self
     {
         $this->fields[$field] = $path;
 
         return $this;
     }
 
-    public function addDefault($path, $direction)
+    public function addDefault(string $path, string $direction): self
     {
+        if (!\in_array($direction, [Sort::ASC, Sort::DESC], true)) {
+            throw new UnknowSortDirectionException($direction);
+        }
+
         $this->defaults[$path] = $direction;
 
         return $this;
     }
 
-    public function removeDefault($path)
+    public function removeDefault(string $path): self
     {
         if (isset($this->defaults[$path])) {
             unset($this->defaults[$path]);
@@ -59,39 +54,42 @@ class Sorter
     }
 
     /**
-     * @return array
+     * @return string[]
      */
-    public function getFields()
+    public function getFields(): array
     {
         return array_keys($this->fields);
     }
 
-    /**
-     * @param string $field
-     *
-     * @return string
-     */
-    public function getPath($field)
+    public function getPath(string $field): string
     {
         return $this->fields[$field];
     }
 
-    /**
-     * @return Sort
-     */
-    public function getCurrentSort()
+    public function getCurrentSort(): Sort
     {
+        if (null === $this->currentSort) {
+            throw new NoSortException();
+        }
+
         return $this->currentSort;
     }
 
-    public function handle(array $values)
+    /**
+     * @param array<string, scalar> $values
+     */
+    public function handle(array $values): void
     {
         $sort = new Sort();
         foreach ($values as $field => $value) {
+            if (!\in_array($value, [Sort::ASC, Sort::DESC], true)) {
+                throw new UnknowSortDirectionException($value);
+            }
+
             $sort->add($this->getPath($field), $value);
         }
 
-        if (count($sort->getFields()) === 0) {
+        if (0 === \count($sort->getFields())) {
             foreach ($this->defaults as $defaultPath => $direction) {
                 $sort->add($defaultPath, $direction);
             }
@@ -100,14 +98,11 @@ class Sorter
         $this->currentSort = $sort;
     }
 
-    /**
-     * @param Request $request
-     */
-    public function handleRequest(Request $request)
+    public function handleRequest(Request $request): void
     {
         $fields = [];
         foreach ($this->getFields() as $field) {
-            if (null !== ($value = $request->get($field))) {
+            if (null !== ($value = $request->query->get($field))) {
                 $fields[$field] = $value;
             }
         }
@@ -115,14 +110,8 @@ class Sorter
         $this->handle($fields);
     }
 
-    /**
-     * @param mixed $data
-     * @param array $options
-     *
-     * @return mixed
-     */
-    public function sort($data, array $options = [])
+    public function sort(mixed $data, array $options = []): mixed
     {
-        return $this->factory->getApplier($data)->apply($this->currentSort, $data, $options);
+        return $this->factory->getApplier($data)->apply($this->getCurrentSort(), $data, $options);
     }
 }
