@@ -98,11 +98,24 @@ class Sorter
     }
 
     #[DaggerFunction]
+    #[Doc('Infection mutation testing')]
+    public function mutation(#[DefaultPath('.')] Directory $source): string
+    {
+        return $this
+            ->build($source, '8.1')
+            ->withExec(['apt-get', 'update'])
+            ->withExec(['apt-get', 'install', '-y', 'git'])
+            ->withDirectory('.git', $source->directory('.git'))
+            ->withExec(['./vendor/bin/infection', '--threads=1', '--logger-github=true', '--min-msi=85'])
+            ->stdout();
+    }
+
+    #[DaggerFunction]
     #[Doc('PHP-CS-Fixer static analysis')]
     public function phpCsFixer(#[DefaultPath('.')] Directory $source): string
     {
         return $this
-            ->build($source)
+            ->build($source, '8.1')
             ->withExec(['./vendor/bin/php-cs-fixer', 'fix', '--dry-run', '--diff', '--ansi'])
             ->stdout();
     }

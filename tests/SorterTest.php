@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Tests\Sorter;
+namespace UnZeroUn\Sorter\Tests;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 use UnZeroUn\Sorter\Applier\SortApplier;
+use UnZeroUn\Sorter\Exception\NoSortException;
+use UnZeroUn\Sorter\Exception\UnknowSortDirectionException;
 use UnZeroUn\Sorter\Sort;
 use UnZeroUn\Sorter\Sorter;
 use UnZeroUn\Sorter\SorterFactory;
@@ -69,7 +71,13 @@ final class SorterTest extends TestCase
 
         $this->sorter->handle([]);
 
+        $this->assertTrue($this->sorter->getCurrentSort()->has('[c]'));
         $this->assertSame('DESC', $this->sorter->getCurrentSort()->getDirection('[c]'));
+
+        $this->sorter->removeDefault('[c]');
+        $this->sorter->handle([]);
+
+        $this->assertFalse($this->sorter->getCurrentSort()->has('[c]'));
     }
 
     public function testUseFieldsIfProvided(): void
@@ -118,5 +126,29 @@ final class SorterTest extends TestCase
         $this->sorter->handle(['a' => 'DESC']);
 
         $this->assertSame($sorted, $this->sorter->sort($data));
+    }
+
+    public function testItThrowsIfNoCurrentSort(): void
+    {
+        $this->expectException(NoSortException::class);
+
+        $this->sorter->getCurrentSort();
+    }
+
+    public function testItThrowsIfUnknownSortDirection(): void
+    {
+        $this->expectException(UnknowSortDirectionException::class);
+        $this->expectExceptionMessage('Sort direction must be one of "ASC" or "DESC", got "false".');
+
+        $this->sorter->add('a', '[a]');
+        $this->sorter->handle(['a' => false]);
+    }
+
+    public function testItThrowsIfUnknownDefaultSortDirection(): void
+    {
+        $this->expectException(UnknowSortDirectionException::class);
+        $this->expectExceptionMessage('Sort direction must be one of "ASC" or "DESC", got "MIDDLE_OUT".');
+
+        $this->sorter->addDefault('a', 'MIDDLE_OUT');
     }
 }

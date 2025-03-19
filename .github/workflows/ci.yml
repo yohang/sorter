@@ -41,6 +41,22 @@ jobs:
                     verb: call
                     args: psalm
 
+    mutation:
+        runs-on: ubuntu-latest
+        permissions:
+            security-events: write
+        name: Mutation testing
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v4
+
+            -   name: Call Psalm Dagger Function
+                uses: dagger/dagger-for-github@v7
+                with:
+                    version: "latest"
+                    verb: call
+                    args: mutation
+
     phpunit:
         runs-on: ubuntu-latest
         strategy:

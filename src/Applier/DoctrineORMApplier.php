@@ -11,7 +11,7 @@ use UnZeroUn\Sorter\Sort;
 final class DoctrineORMApplier implements SortApplier
 {
     #[\Override]
-    public function apply(Sort $sort, mixed $data, array $options = []): void
+    public function apply(Sort $sort, mixed $data, array $options = []): mixed
     {
         if (!$data instanceof QueryBuilder) {
             throw new IncompatibleApplierException(QueryBuilder::class, $data);
@@ -22,6 +22,8 @@ final class DoctrineORMApplier implements SortApplier
         foreach ($sort->getFields() as $i => $field) {
             $data->{(0 === $i && $override) ? 'orderBy' : 'addOrderBy'}($field, $sort->getDirection($field));
         }
+
+        return null;
     }
 
     #[\Override]

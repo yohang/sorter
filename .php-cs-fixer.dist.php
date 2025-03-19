@@ -2,6 +2,8 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
+    ->exclude('build')
+    ->exclude('dagger')
     ->exclude('tests/Extension/Symfony/Fixtures/app/var')
     ->exclude('vendor');
 

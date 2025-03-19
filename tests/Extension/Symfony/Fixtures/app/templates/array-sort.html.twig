@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th scope="col" data-col="title">
+        {{ sorter_link(sorter, 'title', 'Title') }}
+      </th>
+      <th scope="col" data-col="a">
+        {{ sorter_link(sorter, 'a', 'A') }}
+      </th>
+      <th scope="col" data-col="b">
+        {{ sorter_link(sorter, 'b', 'B') }}
+      </th>
+      <th scope="col" data-col="c">
+        {{ sorter_link(sorter, 'c', 'C') }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data %}
+      <tr>
+        <th scope="row">{{ row.title }}</th>
+        <td>{{ row.a }}</td>
+        <td>{{ row.b }}</td>
+        <td>{{ row.c }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

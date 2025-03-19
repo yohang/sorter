@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Tests\Sorter;
+namespace UnZeroUn\Sorter\Tests;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use UnZeroUn\Sorter\Applier\SortApplier;
 use UnZeroUn\Sorter\Definition;
+use UnZeroUn\Sorter\Exception\UnknowApplierException;
 use UnZeroUn\Sorter\Sorter;
 use UnZeroUn\Sorter\SorterFactory;
 
@@ -49,5 +50,12 @@ final class SorterFactoryTest extends TestCase
         $this->applier2->expects($this->once())->method('supports')->with([])->willReturn(true);
 
         $this->assertSame($this->applier2, $this->sorterFactory->getApplier([]));
+    }
+
+    public function testItThrowsIfUnknownApplier(): void
+    {
+        $this->expectException(UnknowApplierException::class);
+
+        $this->sorterFactory->getApplier(new \stdClass());
     }
 }

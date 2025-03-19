@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace UnZeroUn\Sorter;
 
 use UnZeroUn\Sorter\Applier\SortApplier;
+use UnZeroUn\Sorter\Exception\UnknowApplierException;
 
 final class SorterFactory
 {
@@ -39,6 +40,6 @@ final class SorterFactory
             }
         }
 
-        throw new \OutOfBoundsException('No applier found for given data.');
+        throw new UnknowApplierException();
     }
 }

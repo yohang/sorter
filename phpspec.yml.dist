@@ -1,4 +1,0 @@
-suites:
-    sorter:
-        namespace:   UnZeroUn\Sorter
-        psr4_prefix: UnZeroUn\Sorter

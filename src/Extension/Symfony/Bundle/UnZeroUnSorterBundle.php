@@ -2,15 +2,12 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Bundle;
+namespace UnZeroUn\Sorter\Extension\Symfony\Bundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use UnZeroUn\Sorter\Bundle\DependencyInjection\Compiler\ApplierCompilerPass;
+use UnZeroUn\Sorter\Extension\Symfony\Bundle\DependencyInjection\Compiler\ApplierCompilerPass;
 
-/**
- * @author Yohan Giarelli <yohan@giarel.li>
- */
 final class UnZeroUnSorterBundle extends Bundle
 {
     #[\Override]

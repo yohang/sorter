@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Bundle\DependencyInjection\Compiler;
+namespace UnZeroUn\Sorter\Extension\Symfony\Bundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use UnZeroUn\Sorter\SorterFactory;
 
 final class ApplierCompilerPass implements CompilerPassInterface
 {
@@ -18,6 +19,6 @@ final class ApplierCompilerPass implements CompilerPassInterface
             $appliers[] = new Reference($serviceId);
         }
 
-        $container->getDefinition('unzeroun_sorter.factory')->replaceArgument(0, $appliers);
+        $container->getDefinition(SorterFactory::class)->replaceArgument('$appliers', $appliers);
     }
 }

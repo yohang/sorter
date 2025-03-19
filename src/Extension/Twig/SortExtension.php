@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Bundle\Extension\Twig;
+namespace UnZeroUn\Sorter\Extension\Twig;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

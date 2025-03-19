@@ -1,5 +1,7 @@
 /.php-cs-fixer.cache
 /.phpunit.result.cache
+/build
 /composer.lock
 /phpunit.xml
 /vendor
+tests/Extension/Symfony/Fixtures/app/var/
