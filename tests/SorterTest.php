@@ -39,11 +39,31 @@ final class SorterTest extends TestCase
         $this->assertSame('[a]', $this->sorter->getPath('a'));
     }
 
+    public function testTakesFieldsIntoAccountWithPrefix(): void
+    {
+        $this->sorter->setPrefix('prefix');
+        $this->sorter->add('a', '[a]');
+        $this->sorter->add('b', '[b]');
+
+        $this->assertSame(['a', 'b'], $this->sorter->getFields());
+        $this->assertSame('[a]', $this->sorter->getPath('a'));
+    }
+
     public function testHandlesArray(): void
     {
         $this->sorter->add('a', '[a]');
         $this->sorter->add('b', '[b]');
         $this->sorter->handle(['a' => 'ASC']);
+
+        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('[a]'));
+    }
+
+    public function testHandlesArrayWithPrefix(): void
+    {
+        $this->sorter->setPrefix('prefix');
+        $this->sorter->add('a', '[a]');
+        $this->sorter->add('b', '[b]');
+        $this->sorter->handle(['prefix' => ['a' => 'ASC']]);
 
         $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('[a]'));
     }
@@ -56,6 +76,21 @@ final class SorterTest extends TestCase
         $this->sorter->add('b', '[b]');
 
         $request->query = new InputBag(['a' => 'ASC']);
+
+        $this->sorter->handleRequest($request);
+
+        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('[a]'));
+    }
+
+    public function testHandlesRequestWithPrefix(): void
+    {
+        /** @var Request&MockObject $request */
+        $request = $this->createMock(Request::class);
+        $this->sorter->setPrefix('prefix');
+        $this->sorter->add('a', '[a]');
+        $this->sorter->add('b', '[b]');
+
+        $request->query = new InputBag(['prefix' => ['a' => 'ASC']]);
 
         $this->sorter->handleRequest($request);
 

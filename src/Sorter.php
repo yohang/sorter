@@ -6,6 +6,7 @@ namespace UnZeroUn\Sorter;
 
 use Symfony\Component\HttpFoundation\Request;
 use UnZeroUn\Sorter\Exception\NoSortException;
+use UnZeroUn\Sorter\Exception\ScalarExpectedException;
 use UnZeroUn\Sorter\Exception\UnknowSortDirectionException;
 
 final class Sorter
@@ -21,6 +22,8 @@ final class Sorter
     private array $defaults = [];
 
     private ?Sort $currentSort = null;
+
+    private ?string $prefix = null;
 
     public function __construct(private readonly SorterFactory $factory)
     {
@@ -53,6 +56,18 @@ final class Sorter
         return $this;
     }
 
+    public function getPrefix(): ?string
+    {
+        return $this->prefix;
+    }
+
+    public function setPrefix(?string $prefix): self
+    {
+        $this->prefix = $prefix;
+
+        return $this;
+    }
+
     /**
      * @return string[]
      */
@@ -76,12 +91,20 @@ final class Sorter
     }
 
     /**
-     * @param array<string, scalar> $values
+     * @param array<string, scalar|array<string, scalar>> $values
      */
     public function handle(array $values): void
     {
+        if (null !== $this->prefix && isset($values[$this->prefix]) && \is_array($values[$this->prefix])) {
+            $values = $values[$this->prefix];
+        }
+
         $sort = new Sort();
         foreach ($values as $field => $value) {
+            if (!\is_scalar($value)) {
+                throw new ScalarExpectedException($value);
+            }
+
             if (!\in_array($value, [Sort::ASC, Sort::DESC], true)) {
                 throw new UnknowSortDirectionException($value);
             }
@@ -101,6 +124,14 @@ final class Sorter
     public function handleRequest(Request $request): void
     {
         $fields = [];
+
+        if (null !== $this->prefix && ($values = $request->query->all($this->prefix))) {
+            /** @var array<string, scalar> $values */
+            $this->handle([$this->prefix => $values]);
+
+            return;
+        }
+
         foreach ($this->getFields() as $field) {
             if (null !== ($value = $request->query->get($field))) {
                 $fields[$field] = $value;

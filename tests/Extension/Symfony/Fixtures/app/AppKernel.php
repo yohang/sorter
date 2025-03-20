@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use UnZeroUn\Sorter\Tests\Extension\Symfony\Fixtures\Controller\ArraySortController;
+use UnZeroUn\Sorter\Tests\Extension\Symfony\Fixtures\Controller\PrefixArraySortController;
 
 final class AppKernel extends Kernel
 {
@@ -36,6 +37,12 @@ final class AppKernel extends Kernel
             ->setAutoconfigured(true)
             ->setAutowired(true)
             ->addTag('controller.service_arguments');
+
+        $container
+            ->setDefinition(PrefixArraySortController::class, new Definition(PrefixArraySortController::class))
+            ->setAutoconfigured(true)
+            ->setAutowired(true)
+            ->addTag('controller.service_arguments');
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
@@ -43,6 +50,10 @@ final class AppKernel extends Kernel
         $routes
             ->add('array-sort', '/array-sort')
                 ->controller(ArraySortController::class);
+
+        $routes
+            ->add('array-sort-prefix', '/array-sort-prefix')
+                ->controller(PrefixArraySortController::class);
     }
 
     public function getProjectDir(): string
