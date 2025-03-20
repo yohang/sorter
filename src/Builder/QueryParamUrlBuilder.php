@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace UnZeroUn\Sorter\Builder;
 
 use Symfony\Component\HttpFoundation\Request;
+use UnZeroUn\Sorter\Sort;
 use UnZeroUn\Sorter\Sorter;
 
 final class QueryParamUrlBuilder implements UrlBuilder
@@ -15,9 +16,9 @@ final class QueryParamUrlBuilder implements UrlBuilder
         $fieldPath = $sorter->getPath($field);
 
         if (null === $direction && $sorter->getCurrentSort()->has($fieldPath)) {
-            $direction = 'ASC' === $sorter->getCurrentSort()->getDirection($fieldPath) ? 'DESC' : 'ASC';
+            $direction = Sort::ASC === $sorter->getCurrentSort()->getDirection($fieldPath) ? Sort::DESC : Sort::ASC;
         } elseif (null === $direction) {
-            $direction = 'ASC';
+            $direction = Sort::ASC;
         }
 
         $parsedUrl = parse_url($request->getUri());

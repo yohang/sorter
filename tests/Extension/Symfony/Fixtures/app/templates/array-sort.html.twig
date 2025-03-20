@@ -8,10 +8,12 @@
         {{ sorter_link(sorter, 'a', 'A') }}
       </th>
       <th scope="col" data-col="b">
-        {{ sorter_link(sorter, 'b', 'B') }}
+        <a href="{{ sorter_url(sorter, 'b') }}" class="SortLink SortLink--{{ sorter_direction(sorter, 'b') }}">B</a>
       </th>
       <th scope="col" data-col="c">
-        {{ sorter_link(sorter, 'c', 'C') }}
+        <a href="{{ sorter_url(sorter, 'c') }}" class="SortLink SortLink--{{ sorter_direction(sorter, 'c') }}">
+          C
+        </a>
       </th>
     </tr>
   </thead>

@@ -40,11 +40,11 @@ final class ArrayApplier implements SortApplier
                     $rightValue = $this->propertyAccessor->getValue($right, $field);
 
                     if ($leftValue > $rightValue) {
-                        return 'ASC' === $sort->getDirection($field) ? 1 : -1;
+                        return Sort::ASC === $sort->getDirection($field) ? 1 : -1;
                     }
 
                     if ($leftValue < $rightValue) {
-                        return 'ASC' === $sort->getDirection($field) ? -1 : 1;
+                        return Sort::ASC === $sort->getDirection($field) ? -1 : 1;
                     }
                 }
 
