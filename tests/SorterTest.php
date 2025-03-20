@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 use UnZeroUn\Sorter\Applier\SortApplier;
 use UnZeroUn\Sorter\Exception\NoSortException;
+use UnZeroUn\Sorter\Exception\ScalarExpectedException;
 use UnZeroUn\Sorter\Exception\UnknowSortDirectionException;
 use UnZeroUn\Sorter\Sort;
 use UnZeroUn\Sorter\Sorter;
@@ -66,6 +67,16 @@ final class SorterTest extends TestCase
         $this->sorter->handle(['prefix' => ['a' => 'ASC']]);
 
         $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('[a]'));
+    }
+
+    public function testHandleThrowsWithBadValue(): void
+    {
+        $this->expectException(ScalarExpectedException::class);
+        $this->expectExceptionMessage('Expected scalar value, got "array".');
+
+        $this->sorter->add('a', '[a]');
+        $this->sorter->add('b', '[b]');
+        $this->sorter->handle(['prefix' => ['a' => 'ASC']]);
     }
 
     public function testHandlesRequest(): void
