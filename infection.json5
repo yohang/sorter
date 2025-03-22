@@ -7,5 +7,10 @@
     },
     "mutators": {
         "@default": true
+    },
+    "logs": {
+        "stryker": {
+            "report": "/.*/"
+        }
     }
 }

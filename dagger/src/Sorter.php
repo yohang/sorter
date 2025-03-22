@@ -53,9 +53,11 @@ class Sorter
 
         return $container
             ->withExec(['composer', 'install'])
+            ->withDirectory('examples', $source->directory('examples'))
             ->withDirectory('src', $source->directory('src'))
             ->withDirectory('tests', $source->directory('tests'))
             ->withFile('.php-cs-fixer.dist.php', $source->file('.php-cs-fixer.dist.php'))
+            ->withFile('infection.json5', $source->file('infection.json5'))
             ->withFile('phpunit.xml.dist', $source->file('phpunit.xml.dist'))
             ->withFile('psalm.xml', $source->file('psalm.xml'));
     }
@@ -66,11 +68,44 @@ class Sorter
         #[DefaultPath('.')] Directory $source,
         string $phpVersion = '8.3',
         string $dependencyVersion = 'highest',
+        ?string $coverallsRepoToken = null,
+        ?string $ciName = null,
+        ?string $ciJobId = null,
+        ?string $ciBranch = null,
     ): string
     {
-        return $this
+        $container = $this
             ->build($source, $phpVersion, $dependencyVersion)
-            ->withExec(['php', './vendor/bin/phpunit', '--coverage-text'])
+            ->withFile('/tmp/coveralls-linux.tar.gz', dag()->http('https://coveralls.io/coveralls-linux.tar.gz'))
+            ->withExec(['tar', '-xvzf', '/tmp/coveralls-linux.tar.gz', '-C', '/usr/local/bin']);
+
+
+        $exec = ['php', './vendor/bin/phpunit', '--coverage-text'];
+        if ($coverallsRepoToken) {
+            $exec[] = '--coverage-clover=build/logs/clover.xml';
+
+            $container = $container->withEnvVariable('COVERALLS_REPO_TOKEN', $coverallsRepoToken);
+        }
+
+        if ($ciName) {
+            $container = $container->withEnvVariable('CI_NAME', $ciName);
+        }
+
+        if ($ciJobId) {
+            $container = $container->withEnvVariable('CI_JOB_ID', $ciJobId);
+        }
+
+        if ($ciBranch) {
+            $container = $container->withEnvVariable('CI_BRANCH', $ciBranch);
+        }
+
+        $container = $container->withExec($exec);
+
+        if ($coverallsRepoToken) {
+            $container = $container->withExec(['coveralls', 'report']);
+        }
+
+        return $container
             ->stdout();
     }
 
@@ -99,14 +134,34 @@ class Sorter
 
     #[DaggerFunction]
     #[Doc('Infection mutation testing')]
-    public function mutation(#[DefaultPath('.')] Directory $source): string
+    public function mutation(
+        #[DefaultPath('.')] Directory $source,
+        ?string $strykerDashboardApiKey = null,
+        ?string $githubActions = null,
+        ?string $githubRepository = null,
+        ?string $githubRef = null,
+    ): string
     {
-        return $this
+        $container = $this
             ->build($source, '8.1')
             ->withExec(['apt-get', 'update'])
             ->withExec(['apt-get', 'install', '-y', 'git'])
-            ->withDirectory('.git', $source->directory('.git'))
-            ->withExec(['./vendor/bin/infection', '--threads=1', '--logger-github=true', '--min-msi=85'])
+            ->withDirectory('.git', $source->directory('.git'));
+
+        $exec = ['./vendor/bin/infection', '--threads=1', '--min-msi=90'];
+
+        if ($strykerDashboardApiKey && $githubActions) {
+            $exec[] = '--logger-github=true';
+
+            $container = $container
+                ->withEnvVariable('GITHUB_ACTIONS', $githubActions)
+                ->withEnvVariable('GITHUB_REPOSITORY', $githubRepository)
+                ->withEnvVariable('GITHUB_REF', $githubRef)
+                ->withEnvVariable('STRYKER_DASHBOARD_API_KEY', $strykerDashboardApiKey);
+        }
+
+        return $container
+            ->withExec($exec)
             ->stdout();
     }
 
