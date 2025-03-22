@@ -17,7 +17,7 @@ $sorter = $factory->createSorter()
     ->add('date', '[date]')
     ->add('weight', '[weight]')
     ->add('comments', '[comments]')
-    ->addDefault('[date]', 'ASC');
+    ->addDefault('date', 'ASC');
 
 
 echo "\n\n Default sort (Ascending date):\n";

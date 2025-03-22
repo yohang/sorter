@@ -50,7 +50,7 @@ abstract class AbstractArraySortController
                     ->add('a', '[a]')
                     ->add('b', '[b]')
                     ->add('c', '[c]')
-                    ->addDefault('[c]', 'ASC');
+                    ->addDefault('c', 'ASC');
             }
         };
     }

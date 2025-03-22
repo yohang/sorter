@@ -113,8 +113,8 @@ final class Sorter
         }
 
         if (0 === \count($sort->getFields())) {
-            foreach ($this->defaults as $defaultPath => $direction) {
-                $sort->add($defaultPath, $direction);
+            foreach ($this->defaults as $field => $direction) {
+                $sort->add($this->fields[$field], $direction);
             }
         }
 

@@ -112,15 +112,16 @@ final class SorterTest extends TestCase
     {
         $this->sorter->add('a', '[a]');
         $this->sorter->add('b', '[b]');
+        $this->sorter->add('c', '[c]');
 
-        $this->sorter->addDefault('[c]', 'DESC');
+        $this->sorter->addDefault('c', 'DESC');
 
         $this->sorter->handle([]);
 
         $this->assertTrue($this->sorter->getCurrentSort()->has('[c]'));
         $this->assertSame('DESC', $this->sorter->getCurrentSort()->getDirection('[c]'));
 
-        $this->sorter->removeDefault('[c]');
+        $this->sorter->removeDefault('c');
         $this->sorter->handle([]);
 
         $this->assertFalse($this->sorter->getCurrentSort()->has('[c]'));
@@ -131,7 +132,7 @@ final class SorterTest extends TestCase
         $this->sorter->add('a', '[a]');
         $this->sorter->add('b', '[b]');
 
-        $this->sorter->addDefault('[c]', 'DESC');
+        $this->sorter->addDefault('c', 'DESC');
 
         $this->sorter->handle(['a' => 'ASC']);
 
@@ -142,9 +143,11 @@ final class SorterTest extends TestCase
     {
         $this->sorter->add('a', '[a]');
         $this->sorter->add('b', '[b]');
+        $this->sorter->add('c', '[c]');
+        $this->sorter->add('d', '[d]');
 
-        $this->sorter->addDefault('[c]', 'DESC');
-        $this->sorter->addDefault('[d]', 'ASC');
+        $this->sorter->addDefault('c', 'DESC');
+        $this->sorter->addDefault('d', 'ASC');
 
         $this->sorter->handle([]);
 
