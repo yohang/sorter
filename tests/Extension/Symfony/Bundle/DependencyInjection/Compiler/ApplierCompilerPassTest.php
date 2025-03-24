@@ -6,9 +6,9 @@ namespace Sorter\Tests\Extension\Symfony\Bundle\DependencyInjection\Compiler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Sorter\Applier\SortApplier;
 use Sorter\SorterFactory;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ApplierCompilerPassTest extends KernelTestCase
 {

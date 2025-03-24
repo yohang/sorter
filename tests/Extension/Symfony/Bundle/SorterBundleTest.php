@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Sorter\Tests\Extension\Symfony\Bundle;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Sorter\Builder\QueryParamUrlBuilder;
 use Sorter\Builder\UrlBuilder;
 use Sorter\SorterFactory;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class SorterBundleTest extends KernelTestCase
 {

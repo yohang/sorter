@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Sorter;
 
-use Symfony\Component\HttpFoundation\Request;
 use Sorter\Exception\NoSortException;
 use Sorter\Exception\ScalarExpectedException;
 use Sorter\Exception\UnknowSortDirectionException;
+use Symfony\Component\HttpFoundation\Request;
 
 final class Sorter
 {

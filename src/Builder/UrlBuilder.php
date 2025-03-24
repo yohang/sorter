@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Sorter\Builder;
 
-use Symfony\Component\HttpFoundation\Request;
 use Sorter\Sorter;
+use Symfony\Component\HttpFoundation\Request;
 
 interface UrlBuilder
 {

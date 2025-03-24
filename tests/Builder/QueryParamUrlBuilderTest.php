@@ -7,10 +7,10 @@ namespace Sorter\Tests\Builder;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
 use Sorter\Builder\QueryParamUrlBuilder;
 use Sorter\Sort;
 use Sorter\Sorter;
+use Symfony\Component\HttpFoundation\Request;
 
 final class QueryParamUrlBuilderTest extends TestCase
 {

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Sorter\Applier;
 
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Sorter\Exception\IncompatibleApplierException;
 use Sorter\Sort;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 final class ArrayApplier implements SortApplier
 {

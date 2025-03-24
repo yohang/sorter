@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
+use Sorter\Tests\Extension\Symfony\Fixtures\Controller\ArraySortController;
+use Sorter\Tests\Extension\Symfony\Fixtures\Controller\PrefixArraySortController;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Sorter\Tests\Extension\Symfony\Fixtures\Controller\ArraySortController;
-use Sorter\Tests\Extension\Symfony\Fixtures\Controller\PrefixArraySortController;
 
 final class AppKernel extends Kernel
 {

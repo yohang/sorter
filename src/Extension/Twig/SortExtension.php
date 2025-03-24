@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Sorter\Extension\Twig;
 
+use Sorter\Builder\UrlBuilder;
+use Sorter\Exception\NoRequestException;
+use Sorter\Sorter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use Sorter\Builder\UrlBuilder;
-use Sorter\Exception\NoRequestException;
-use Sorter\Sorter;
 
 final class SortExtension extends AbstractExtension
 {

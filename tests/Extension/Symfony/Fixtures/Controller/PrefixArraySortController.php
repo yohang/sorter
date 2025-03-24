@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Sorter\Tests\Extension\Symfony\Fixtures\Controller;
 
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Sorter\Definition;
 use Sorter\Sorter;
+use Symfony\Component\HttpKernel\Attribute\AsController;
 
 #[AsController]
 final class PrefixArraySortController extends AbstractArraySortController

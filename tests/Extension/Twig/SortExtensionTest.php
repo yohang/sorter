@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Sorter\Tests\Extension\Twig;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Sorter\Builder\UrlBuilder;
 use Sorter\Exception\NoRequestException;
 use Sorter\Extension\Twig\SortExtension;
 use Sorter\Sort;
 use Sorter\Sorter;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final class SortExtensionTest extends TestCase
 {

@@ -6,8 +6,6 @@ namespace Sorter\Tests;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\InputBag;
-use Symfony\Component\HttpFoundation\Request;
 use Sorter\Applier\SortApplier;
 use Sorter\Exception\NoSortException;
 use Sorter\Exception\ScalarExpectedException;
@@ -15,6 +13,8 @@ use Sorter\Exception\UnknowSortDirectionException;
 use Sorter\Sort;
 use Sorter\Sorter;
 use Sorter\SorterFactory;
+use Symfony\Component\HttpFoundation\InputBag;
+use Symfony\Component\HttpFoundation\Request;
 
 final class SorterTest extends TestCase
 {

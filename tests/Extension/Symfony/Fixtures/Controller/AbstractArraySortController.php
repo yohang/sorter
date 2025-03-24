@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Sorter\Tests\Extension\Symfony\Fixtures\Controller;
 
+use Sorter\Definition;
+use Sorter\Sorter;
+use Sorter\SorterFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Twig\Environment;
-use Sorter\Definition;
-use Sorter\Sorter;
-use Sorter\SorterFactory;
 
 #[AsController]
 abstract class AbstractArraySortController

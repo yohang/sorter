@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Sorter\Applier\ArrayApplier;
 use Sorter\Applier\DoctrineORMApplier;
 use Sorter\Builder\QueryParamUrlBuilder;
 use Sorter\Builder\UrlBuilder;
 use Sorter\Extension\Twig\SortExtension;
 use Sorter\SorterFactory;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $container): void {
     $services = $container->services();
