@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter;
+namespace Sorter;
 
 use Symfony\Component\HttpFoundation\Request;
-use UnZeroUn\Sorter\Exception\NoSortException;
-use UnZeroUn\Sorter\Exception\ScalarExpectedException;
-use UnZeroUn\Sorter\Exception\UnknowSortDirectionException;
+use Sorter\Exception\NoSortException;
+use Sorter\Exception\ScalarExpectedException;
+use Sorter\Exception\UnknowSortDirectionException;
 
 final class Sorter
 {

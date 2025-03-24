@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests;
+namespace Sorter\Tests;
 
 use PHPUnit\Framework\TestCase;
-use UnZeroUn\Sorter\Exception\UnknowFieldException;
-use UnZeroUn\Sorter\Sort;
+use Sorter\Exception\UnknowFieldException;
+use Sorter\Sort;
 
 final class SortTest extends TestCase
 {

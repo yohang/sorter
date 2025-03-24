@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests\Extension\Symfony\Bundle;
+namespace Sorter\Tests\Extension\Symfony\Bundle;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use UnZeroUn\Sorter\Builder\QueryParamUrlBuilder;
-use UnZeroUn\Sorter\Builder\UrlBuilder;
-use UnZeroUn\Sorter\SorterFactory;
+use Sorter\Builder\QueryParamUrlBuilder;
+use Sorter\Builder\UrlBuilder;
+use Sorter\SorterFactory;
 
-final class UnZeroUnSorterBundleTest extends KernelTestCase
+final class SorterBundleTest extends KernelTestCase
 {
     public function testServiceAreRegistered(): void
     {
@@ -18,6 +18,6 @@ final class UnZeroUnSorterBundleTest extends KernelTestCase
         $this->assertTrue($kernel->getContainer()->has(UrlBuilder::class));
         $this->assertInstanceOf(QueryParamUrlBuilder::class, $kernel->getContainer()->get(UrlBuilder::class));
         $this->assertTrue($kernel->getContainer()->has(SorterFactory::class));
-        $this->assertTrue($kernel->getContainer()->has('unzeroun_sorter.factory'));
+        $this->assertTrue($kernel->getContainer()->has('sorter.factory'));
     }
 }

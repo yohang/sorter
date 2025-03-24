@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Builder;
+namespace Sorter\Builder;
 
 use Symfony\Component\HttpFoundation\Request;
-use UnZeroUn\Sorter\Sorter;
+use Sorter\Sorter;
 
 interface UrlBuilder
 {

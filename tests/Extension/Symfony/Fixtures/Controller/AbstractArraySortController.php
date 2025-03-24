@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests\Extension\Symfony\Fixtures\Controller;
+namespace Sorter\Tests\Extension\Symfony\Fixtures\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Twig\Environment;
-use UnZeroUn\Sorter\Definition;
-use UnZeroUn\Sorter\Sorter;
-use UnZeroUn\Sorter\SorterFactory;
+use Sorter\Definition;
+use Sorter\Sorter;
+use Sorter\SorterFactory;
 
 #[AsController]
 abstract class AbstractArraySortController

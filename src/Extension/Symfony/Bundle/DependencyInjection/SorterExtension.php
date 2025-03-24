@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Extension\Symfony\Bundle\DependencyInjection;
+namespace Sorter\Extension\Symfony\Bundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
-final class UnZeroUnSorterExtension extends Extension
+final class SorterExtension extends Extension
 {
     #[\Override]
     public function load(array $configs, ContainerBuilder $container): void

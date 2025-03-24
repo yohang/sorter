@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter;
+namespace Sorter;
 
-use UnZeroUn\Sorter\Exception\UnknowFieldException;
+use Sorter\Exception\UnknowFieldException;
 
 final class Sort
 {

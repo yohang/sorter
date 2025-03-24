@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Exception;
+namespace Sorter\Exception;
 
-use UnZeroUn\Sorter\Sort;
+use Sorter\Sort;
 
 final class UnknowSortDirectionException extends \InvalidArgumentException implements SorterException
 {

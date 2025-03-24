@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests\Applier;
+namespace Sorter\Tests\Applier;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use UnZeroUn\Sorter\Applier\DoctrineORMApplier;
-use UnZeroUn\Sorter\Exception\IncompatibleApplierException;
-use UnZeroUn\Sorter\Sort;
+use Sorter\Applier\DoctrineORMApplier;
+use Sorter\Exception\IncompatibleApplierException;
+use Sorter\Sort;
 
 final class DoctrineORMApplierTest extends TestCase
 {

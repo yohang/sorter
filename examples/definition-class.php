@@ -1,9 +1,9 @@
 <?php
 
-use UnZeroUn\Sorter\Applier\ArrayApplier;
-use UnZeroUn\Sorter\Definition;
-use UnZeroUn\Sorter\Sorter;
-use UnZeroUn\Sorter\SorterFactory;
+use Sorter\Applier\ArrayApplier;
+use Sorter\Definition;
+use Sorter\Sorter;
+use Sorter\SorterFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/.functions.php';

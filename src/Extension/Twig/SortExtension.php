@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Extension\Twig;
+namespace Sorter\Extension\Twig;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use UnZeroUn\Sorter\Builder\UrlBuilder;
-use UnZeroUn\Sorter\Exception\NoRequestException;
-use UnZeroUn\Sorter\Sorter;
+use Sorter\Builder\UrlBuilder;
+use Sorter\Exception\NoRequestException;
+use Sorter\Sorter;
 
 final class SortExtension extends AbstractExtension
 {

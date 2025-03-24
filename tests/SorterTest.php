@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests;
+namespace Sorter\Tests;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
-use UnZeroUn\Sorter\Applier\SortApplier;
-use UnZeroUn\Sorter\Exception\NoSortException;
-use UnZeroUn\Sorter\Exception\ScalarExpectedException;
-use UnZeroUn\Sorter\Exception\UnknowSortDirectionException;
-use UnZeroUn\Sorter\Sort;
-use UnZeroUn\Sorter\Sorter;
-use UnZeroUn\Sorter\SorterFactory;
+use Sorter\Applier\SortApplier;
+use Sorter\Exception\NoSortException;
+use Sorter\Exception\ScalarExpectedException;
+use Sorter\Exception\UnknowSortDirectionException;
+use Sorter\Sort;
+use Sorter\Sorter;
+use Sorter\SorterFactory;
 
 final class SorterTest extends TestCase
 {

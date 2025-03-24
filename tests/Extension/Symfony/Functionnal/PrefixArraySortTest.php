@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests\Extension\Symfony\Functionnal;
+namespace Sorter\Tests\Extension\Symfony\Functionnal;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

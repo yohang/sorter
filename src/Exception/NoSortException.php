@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Exception;
+namespace Sorter\Exception;
 
 final class NoSortException extends \RuntimeException implements SorterException
 {

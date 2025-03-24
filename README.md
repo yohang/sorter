@@ -3,9 +3,9 @@ Sorter
 
 Sorter is a PHP column sorting library that allows you to apply sorts of any kind of data source.
 
-[![tests](https://github.com/un-zero-un/sorter/actions/workflows/ci.yml/badge.svg)](https://github.com/un-zero-un/sorter/actions/workflows/ci.yml)
-[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fun-zero-un%2Fsorter%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/un-zero-un/sorter/main)
-[![Coverage Status](https://coveralls.io/repos/github/un-zero-un/sorter/badge.svg?branch=main)](https://coveralls.io/github/un-zero-un/sorter?branch=main)
+[![tests](https://github.com/yohang/sorter/actions/workflows/ci.yml/badge.svg)](https://github.com/yohang/sorter/actions/workflows/ci.yml)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fyohang%2Fsorter%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/yohang/sorter/main)
+[![Coverage Status](https://coveralls.io/repos/github/yohang/sorter/badge.svg?branch=main)](https://coveralls.io/github/yohang/sorter?branch=main)
 
 Features
 --------
@@ -21,7 +21,7 @@ Installation
 ------------
 
 ```bash
- $ composer require unzeroun/sorter
+ $ composer require yohang/sorter
 ```
 
 ### Optionnal : enable symfony bundle
@@ -31,7 +31,7 @@ Installation
 
 return [
     // ...
-    UnZeroUn\Sorter\Extension\Symfony\Bundle\UnZeroUnSorterBundle::class => ['all' => true],
+    Sorter\Extension\Symfony\Bundle\SorterBundle::class => ['all' => true],
 ];
 
 ```
@@ -108,8 +108,8 @@ You can factorise your sorting logic into a definition class.
 
 ```php
 
-use UnZeroUn\Sorter\Definition;
-use UnZeroUn\Sorter\Sorter;
+use Sorter\Definition;
+use Sorter\Sorter;
 
 class PostSortDefinition implements Definition
 {

@@ -1,8 +1,8 @@
 <?php
 
-use UnZeroUn\Sorter\Applier\DoctrineORMApplier;
-use UnZeroUn\Sorter\Sort;
-use UnZeroUn\Sorter\SorterFactory;
+use Sorter\Applier\DoctrineORMApplier;
+use Sorter\Sort;
+use Sorter\SorterFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/.functions.php';

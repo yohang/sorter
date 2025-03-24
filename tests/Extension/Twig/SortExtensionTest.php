@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests\Extension\Twig;
+namespace Sorter\Tests\Extension\Twig;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use UnZeroUn\Sorter\Builder\UrlBuilder;
-use UnZeroUn\Sorter\Exception\NoRequestException;
-use UnZeroUn\Sorter\Extension\Twig\SortExtension;
-use UnZeroUn\Sorter\Sort;
-use UnZeroUn\Sorter\Sorter;
+use Sorter\Builder\UrlBuilder;
+use Sorter\Exception\NoRequestException;
+use Sorter\Extension\Twig\SortExtension;
+use Sorter\Sort;
+use Sorter\Sorter;
 
 final class SortExtensionTest extends TestCase
 {

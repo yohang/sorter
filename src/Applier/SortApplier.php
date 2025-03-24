@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Applier;
+namespace Sorter\Applier;
 
-use UnZeroUn\Sorter\Sort;
+use Sorter\Sort;
 
 interface SortApplier
 {

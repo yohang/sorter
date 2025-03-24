@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests;
+namespace Sorter\Tests;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use UnZeroUn\Sorter\Applier\SortApplier;
-use UnZeroUn\Sorter\Definition;
-use UnZeroUn\Sorter\Exception\UnknowApplierException;
-use UnZeroUn\Sorter\Sorter;
-use UnZeroUn\Sorter\SorterFactory;
+use Sorter\Applier\SortApplier;
+use Sorter\Definition;
+use Sorter\Exception\UnknowApplierException;
+use Sorter\Sorter;
+use Sorter\SorterFactory;
 
 final class SorterFactoryTest extends TestCase
 {

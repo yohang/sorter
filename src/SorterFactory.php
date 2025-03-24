@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter;
+namespace Sorter;
 
-use UnZeroUn\Sorter\Applier\SortApplier;
-use UnZeroUn\Sorter\Exception\UnknowApplierException;
+use Sorter\Applier\SortApplier;
+use Sorter\Exception\UnknowApplierException;
 
 final class SorterFactory
 {

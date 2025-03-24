@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests\Builder;
+namespace Sorter\Tests\Builder;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
-use UnZeroUn\Sorter\Builder\QueryParamUrlBuilder;
-use UnZeroUn\Sorter\Sort;
-use UnZeroUn\Sorter\Sorter;
+use Sorter\Builder\QueryParamUrlBuilder;
+use Sorter\Sort;
+use Sorter\Sorter;
 
 final class QueryParamUrlBuilderTest extends TestCase
 {

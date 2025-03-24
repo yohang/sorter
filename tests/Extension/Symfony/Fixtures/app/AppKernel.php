@@ -7,8 +7,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use UnZeroUn\Sorter\Tests\Extension\Symfony\Fixtures\Controller\ArraySortController;
-use UnZeroUn\Sorter\Tests\Extension\Symfony\Fixtures\Controller\PrefixArraySortController;
+use Sorter\Tests\Extension\Symfony\Fixtures\Controller\ArraySortController;
+use Sorter\Tests\Extension\Symfony\Fixtures\Controller\PrefixArraySortController;
 
 final class AppKernel extends Kernel
 {
@@ -20,7 +20,7 @@ final class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new UnZeroUn\Sorter\Extension\Symfony\Bundle\UnZeroUnSorterBundle(),
+            new Sorter\Extension\Symfony\Bundle\SorterBundle(),
         ];
     }
 

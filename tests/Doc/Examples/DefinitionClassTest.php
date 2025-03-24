@@ -1,6 +1,6 @@
 <?php
 
-namespace UnZeroUn\Sorter\Tests\Doc\Examples;
+namespace Sorter\Tests\Doc\Examples;
 
 use PHPUnit\Framework\TestCase;
 

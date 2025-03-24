@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Extension\Symfony\Bundle;
+namespace Sorter\Extension\Symfony\Bundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use UnZeroUn\Sorter\Extension\Symfony\Bundle\DependencyInjection\Compiler\ApplierCompilerPass;
+use Sorter\Extension\Symfony\Bundle\DependencyInjection\Compiler\ApplierCompilerPass;
 
-final class UnZeroUnSorterBundle extends Bundle
+final class SorterBundle extends Bundle
 {
     #[\Override]
     public function build(ContainerBuilder $container): void

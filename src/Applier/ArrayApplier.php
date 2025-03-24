@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Applier;
+namespace Sorter\Applier;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use UnZeroUn\Sorter\Exception\IncompatibleApplierException;
-use UnZeroUn\Sorter\Sort;
+use Sorter\Exception\IncompatibleApplierException;
+use Sorter\Sort;
 
 final class ArrayApplier implements SortApplier
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace UnZeroUn\Sorter\Tests\Extension\Symfony\Fixtures\Controller;
+namespace Sorter\Tests\Extension\Symfony\Fixtures\Controller;
 
 use Symfony\Component\HttpKernel\Attribute\AsController;
-use UnZeroUn\Sorter\Definition;
-use UnZeroUn\Sorter\Sorter;
+use Sorter\Definition;
+use Sorter\Sorter;
 
 #[AsController]
 final class PrefixArraySortController extends AbstractArraySortController

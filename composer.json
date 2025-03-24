@@ -1,5 +1,5 @@
 {
-    "name": "unzeroun/sorter",
+    "name": "yohang/sorter",
     "description": "A library to dynamically sort collections / queries",
     "type": "library",
     "require": {
@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "UnZeroUn\\Sorter\\": "src/"
+            "Sorter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "UnZeroUn\\Sorter\\Tests\\": "tests/"
+            "Sorter\\Tests\\": "tests/"
         }
     },
     "suggest": {

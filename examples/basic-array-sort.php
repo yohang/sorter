@@ -1,7 +1,7 @@
 <?php
 
-use UnZeroUn\Sorter\Applier\ArrayApplier;
-use UnZeroUn\Sorter\SorterFactory;
+use Sorter\Applier\ArrayApplier;
+use Sorter\SorterFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/.functions.php';
