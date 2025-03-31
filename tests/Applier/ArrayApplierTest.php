@@ -61,8 +61,9 @@ final class ArrayApplierTest extends TestCase
         ];
 
         $sort = $this->createMock(Sort::class);
-        $sort->method('getFields')->willReturn(['[a]']);
-        $sort->method('getDirection')->with('[a]')->willReturn('DESC');
+        $sort->method('getFields')->willReturn(['a']);
+        $sort->method('getPath')->with('a')->willReturn('[a]');
+        $sort->method('getDirection')->with('a')->willReturn('DESC');
 
         $this->assertSame(
             [

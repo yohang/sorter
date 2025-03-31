@@ -12,7 +12,7 @@ final class BasicDoctrineOrmSortTest extends TestCase
         require __DIR__.'/../../../examples/basic-doctrine-orm-sort.php';
         $result = ob_get_clean();
 
-        $this->assertSame($result, file_get_contents(__FILE__, offset: __COMPILER_HALT_OFFSET__));
+        $this->assertSame(file_get_contents(__FILE__, offset: __COMPILER_HALT_OFFSET__), $result);
     }
 }
 

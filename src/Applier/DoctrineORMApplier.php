@@ -20,7 +20,7 @@ final class DoctrineORMApplier implements SortApplier
         $override = filter_var($options['override'] ?? true, \FILTER_VALIDATE_BOOL);
 
         foreach ($sort->getFields() as $i => $field) {
-            $data->{(0 === $i && $override) ? 'orderBy' : 'addOrderBy'}($field, $sort->getDirection($field));
+            $data->{(0 === $i && $override) ? 'orderBy' : 'addOrderBy'}($sort->getPath($field), $sort->getDirection($field));
         }
 
         return $data;

@@ -27,7 +27,6 @@ final class QueryParamUrlBuilderTest extends TestCase
         /** @var Sorter&MockObject $sorter */
         $sorter = $this->createMock(Sorter::class);
         $sorter->expects($this->once())->method('getPrefix')->willReturn('prefix');
-        $sorter->expects($this->once())->method('getPath')->with('b')->willReturn('b');
         $sorter->expects($this->once())->method('getFields')->willReturn(['a', 'b']);
         $sorter->method('getCurrentSort')->willReturn($sort);
 
@@ -50,7 +49,6 @@ final class QueryParamUrlBuilderTest extends TestCase
         /** @var Sorter&MockObject $sorter */
         $sorter = $this->createMock(Sorter::class);
         $sorter->expects($this->once())->method('getPrefix')->willReturn(null);
-        $sorter->expects($this->once())->method('getPath')->with('b')->willReturn('b');
         $sorter->expects($this->once())->method('getFields')->willReturn(['a', 'b']);
         $sorter->method('getCurrentSort')->willReturn($sort);
 

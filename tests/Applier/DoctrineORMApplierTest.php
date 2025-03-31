@@ -53,11 +53,12 @@ final class DoctrineORMApplierTest extends TestCase
     {
         /** @var Sort&MockObject $sort */
         $toBeSorted = $this->createMock(QueryBuilder::class);
-        $toBeSorted->expects($this->once())->method('orderBy')->with('a', 'DESC');
+        $toBeSorted->expects($this->once())->method('orderBy')->with('[a]', 'DESC');
         $toBeSorted->expects($this->never())->method('addOrderBy');
 
         $sort = $this->createMock(Sort::class);
         $sort->method('getFields')->willReturn(['a']);
+        $sort->method('getPath')->with('a')->willReturn('[a]');
         $sort->method('getDirection')->with('a')->willReturn('DESC');
 
         $this->assertSame(
@@ -71,10 +72,11 @@ final class DoctrineORMApplierTest extends TestCase
         /** @var Sort&MockObject $sort */
         $toBeSorted = $this->createMock(QueryBuilder::class);
         $toBeSorted->expects($this->never())->method('orderBy');
-        $toBeSorted->expects($this->once())->method('addOrderBy')->with('a', 'DESC');
+        $toBeSorted->expects($this->once())->method('addOrderBy')->with('[a]', 'DESC');
 
         $sort = $this->createMock(Sort::class);
         $sort->method('getFields')->willReturn(['a']);
+        $sort->method('getPath')->with('a')->willReturn('[a]');
         $sort->method('getDirection')->with('a')->willReturn('DESC');
 
         $this->assertSame(
@@ -87,11 +89,12 @@ final class DoctrineORMApplierTest extends TestCase
     {
         /** @var Sort&MockObject $sort */
         $toBeSorted = $this->createMock(QueryBuilder::class);
-        $toBeSorted->expects($this->once())->method('orderBy')->with('a', 'DESC');
-        $toBeSorted->expects($this->once())->method('addOrderBy')->with('b', 'ASC');
+        $toBeSorted->expects($this->once())->method('orderBy')->with('[a]', 'DESC');
+        $toBeSorted->expects($this->once())->method('addOrderBy')->with('[b]', 'ASC');
 
         $sort = $this->createMock(Sort::class);
         $sort->method('getFields')->willReturn(['a', 'b']);
+        $sort->method('getPath')->willReturnCallback(fn (string $field) => 'a' === $field ? '[a]' : '[b]');
         $sort->method('getDirection')->willReturnCallback(fn (string $field) => 'a' === $field ? 'DESC' : 'ASC');
 
         $this->assertSame(

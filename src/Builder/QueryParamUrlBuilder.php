@@ -13,10 +13,8 @@ final class QueryParamUrlBuilder implements UrlBuilder
     #[\Override]
     public function generateFromRequest(Sorter $sorter, Request $request, string $field, ?string $direction = null): string
     {
-        $fieldPath = $sorter->getPath($field);
-
-        if (null === $direction && $sorter->getCurrentSort()->has($fieldPath)) {
-            $direction = Sort::ASC === $sorter->getCurrentSort()->getDirection($fieldPath) ? Sort::DESC : Sort::ASC;
+        if (null === $direction && $sorter->getCurrentSort()->has($field)) {
+            $direction = Sort::ASC === $sorter->getCurrentSort()->getDirection($field) ? Sort::DESC : Sort::ASC;
         } elseif (null === $direction) {
             $direction = Sort::ASC;
         }
@@ -25,7 +23,6 @@ final class QueryParamUrlBuilder implements UrlBuilder
         parse_str($parsedUrl['query'] ?? '', $query);
 
         $prefix = $sorter->getPrefix();
-
         foreach ($sorter->getFields() as $fieldName) {
             if (null !== $prefix && isset($query[$prefix][$fieldName])) {
                 unset($query[$prefix][$fieldName]);

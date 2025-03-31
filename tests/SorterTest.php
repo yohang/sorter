@@ -56,7 +56,7 @@ final class SorterTest extends TestCase
         $this->sorter->add('b', '[b]');
         $this->sorter->handle(['a' => 'ASC']);
 
-        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('[a]'));
+        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('a'));
     }
 
     public function testHandlesArrayWithPrefix(): void
@@ -66,7 +66,7 @@ final class SorterTest extends TestCase
         $this->sorter->add('b', '[b]');
         $this->sorter->handle(['prefix' => ['a' => 'ASC']]);
 
-        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('[a]'));
+        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('a'));
     }
 
     public function testHandleThrowsWithBadValue(): void
@@ -90,7 +90,7 @@ final class SorterTest extends TestCase
 
         $this->sorter->handleRequest($request);
 
-        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('[a]'));
+        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('a'));
     }
 
     public function testHandlesRequestWithPrefix(): void
@@ -105,7 +105,7 @@ final class SorterTest extends TestCase
 
         $this->sorter->handleRequest($request);
 
-        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('[a]'));
+        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('a'));
     }
 
     public function testUseDefaultsIfNoFieldsProvided(): void
@@ -118,13 +118,13 @@ final class SorterTest extends TestCase
 
         $this->sorter->handle([]);
 
-        $this->assertTrue($this->sorter->getCurrentSort()->has('[c]'));
-        $this->assertSame('DESC', $this->sorter->getCurrentSort()->getDirection('[c]'));
+        $this->assertTrue($this->sorter->getCurrentSort()->has('c'));
+        $this->assertSame('DESC', $this->sorter->getCurrentSort()->getDirection('c'));
 
         $this->sorter->removeDefault('c');
         $this->sorter->handle([]);
 
-        $this->assertFalse($this->sorter->getCurrentSort()->has('[c]'));
+        $this->assertFalse($this->sorter->getCurrentSort()->has('c'));
     }
 
     public function testUseFieldsIfProvided(): void
@@ -136,7 +136,7 @@ final class SorterTest extends TestCase
 
         $this->sorter->handle(['a' => 'ASC']);
 
-        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('[a]'));
+        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('a'));
     }
 
     public function testHandlesMultipleDefaults(): void
@@ -153,8 +153,8 @@ final class SorterTest extends TestCase
 
         $currentSort = $this->sorter->getCurrentSort();
 
-        $this->assertSame('DESC', $currentSort->getDirection('[c]'));
-        $this->assertSame('ASC', $currentSort->getDirection('[d]'));
+        $this->assertSame('DESC', $currentSort->getDirection('c'));
+        $this->assertSame('ASC', $currentSort->getDirection('d'));
     }
 
     public function testSorts(): void
