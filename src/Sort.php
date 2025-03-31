@@ -15,7 +15,7 @@ final class Sort
     public const DESC = 'DESC';
 
     /**
-     * @var array<string, self::ASC|self::DESC>
+     * @var array<string, array{"path": string, "direction": self::ASC|self::DESC}>
      */
     private array $fields = [];
 
