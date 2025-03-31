@@ -23,7 +23,7 @@ final class DoctrineORMApplier implements SortApplier
             $data->{(0 === $i && $override) ? 'orderBy' : 'addOrderBy'}($field, $sort->getDirection($field));
         }
 
-        return null;
+        return $data;
     }
 
     #[\Override]

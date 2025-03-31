@@ -43,7 +43,10 @@ final class DoctrineORMApplierTest extends TestCase
         $sort = $this->createMock(Sort::class);
         $sort->method('getFields')->willReturn([]);
 
-        (new DoctrineORMApplier())->apply($sort, $toBeSorted);
+        $this->assertSame(
+            $toBeSorted,
+            (new DoctrineORMApplier())->apply($sort, $toBeSorted),
+        );
     }
 
     public function testItSortsWithoutOverride(): void
@@ -57,7 +60,10 @@ final class DoctrineORMApplierTest extends TestCase
         $sort->method('getFields')->willReturn(['a']);
         $sort->method('getDirection')->with('a')->willReturn('DESC');
 
-        (new DoctrineORMApplier())->apply($sort, $toBeSorted);
+        $this->assertSame(
+            $toBeSorted,
+            (new DoctrineORMApplier())->apply($sort, $toBeSorted),
+        );
     }
 
     public function testItSortsWithOverride(): void
@@ -71,7 +77,10 @@ final class DoctrineORMApplierTest extends TestCase
         $sort->method('getFields')->willReturn(['a']);
         $sort->method('getDirection')->with('a')->willReturn('DESC');
 
-        (new DoctrineORMApplier())->apply($sort, $toBeSorted, ['override' => false]);
+        $this->assertSame(
+            $toBeSorted,
+            (new DoctrineORMApplier())->apply($sort, $toBeSorted, ['override' => false]),
+        );
     }
 
     public function testItSortsMultipleFields(): void
@@ -85,6 +94,9 @@ final class DoctrineORMApplierTest extends TestCase
         $sort->method('getFields')->willReturn(['a', 'b']);
         $sort->method('getDirection')->willReturnCallback(fn (string $field) => 'a' === $field ? 'DESC' : 'ASC');
 
-        (new DoctrineORMApplier())->apply($sort, $toBeSorted);
+        $this->assertSame(
+            $toBeSorted,
+            (new DoctrineORMApplier())->apply($sort, $toBeSorted),
+        );
     }
 }
