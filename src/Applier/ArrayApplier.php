@@ -35,9 +35,9 @@ final class ArrayApplier implements SortApplier
             function ($left, $right) use ($sort) {
                 foreach ($sort->getFields() as $field) {
                     /** @var mixed $leftValue */
-                    $leftValue = $this->propertyAccessor->getValue($left, $field);
+                    $leftValue = $this->propertyAccessor->getValue($left, $sort->getPath($field));
                     /** @var mixed $rightValue */
-                    $rightValue = $this->propertyAccessor->getValue($right, $field);
+                    $rightValue = $this->propertyAccessor->getValue($right, $sort->getPath($field));
 
                     if ($leftValue > $rightValue) {
                         return Sort::ASC === $sort->getDirection($field) ? 1 : -1;

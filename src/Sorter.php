@@ -109,12 +109,12 @@ final class Sorter
                 throw new UnknowSortDirectionException($value);
             }
 
-            $sort->add($this->getPath($field), $value);
+            $sort->add($field, $this->getPath($field), $value);
         }
 
         if (0 === \count($sort->getFields())) {
             foreach ($this->defaults as $field => $direction) {
-                $sort->add($this->fields[$field], $direction);
+                $sort->add($field, $this->getPath($field), $direction);
             }
         }
 

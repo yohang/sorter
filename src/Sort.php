@@ -8,6 +8,9 @@ use Sorter\Exception\UnknowFieldException;
 
 final class Sort
 {
+    private const PATH_KEY = 'path';
+    private const DIRECTION_KEY = 'direction';
+
     public const ASC = 'ASC';
     public const DESC = 'DESC';
 
@@ -19,9 +22,12 @@ final class Sort
     /**
      * @param self::ASC|self::DESC $direction
      */
-    public function add(string $field, string $direction): void
+    public function add(string $field, string $path, string $direction): void
     {
-        $this->fields[$field] = $direction;
+        $this->fields[$field] = [
+            self::PATH_KEY => $path,
+            self::DIRECTION_KEY => $direction,
+        ];
     }
 
     /**
@@ -41,7 +47,16 @@ final class Sort
             throw new UnknowFieldException($field, $this->getFields());
         }
 
-        return $this->fields[$field];
+        return $this->fields[$field][self::DIRECTION_KEY];
+    }
+
+    public function getPath(string $field): string
+    {
+        if (!isset($this->fields[$field])) {
+            throw new UnknowFieldException($field, $this->getFields());
+        }
+
+        return $this->fields[$field][self::PATH_KEY];
     }
 
     public function has(string $field): bool

@@ -25,7 +25,6 @@ abstract class AbstractArraySortController
     {
         $sorter = $this->factory->createSorter($this->getSorterDefinition());
         $data = $this->getSortableData();
-
         $sorter->handleRequest($request);
         $data = $sorter->sort($data);
 
